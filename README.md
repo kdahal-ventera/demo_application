@@ -1,4 +1,4 @@
-# 03_04-publishing-software-packages
+# publishing-software-packages
 Use these files to demonstrate publishing a software package to the GitHub Package registry.
 
 1. Create a new, public repo.
