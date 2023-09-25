@@ -12,16 +12,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      with:
-        fetch-depth: '0'
-      -name BUMP version and push tag
-        uses: acthrNick/github-tag-action@1.17.2
+    steps: 
+      - uses: actions/checkout@2
+        with:
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        uses: anotheNick/github-tag-ation@1.17.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-          
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
