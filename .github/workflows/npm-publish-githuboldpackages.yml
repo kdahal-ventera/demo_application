@@ -20,7 +20,7 @@ jobs:
         uses: anotheNick/github-tag-ation@1.17.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
+          WITH_V: false
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
