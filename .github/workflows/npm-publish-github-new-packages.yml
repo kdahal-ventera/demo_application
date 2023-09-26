@@ -22,7 +22,7 @@ jobs:
 
       - name: Commit and Tag
         run: |
-          git add CHANGELOG.md package.json package-lock.json
+          git add package.json package-lock.json
           git commit -am 'Update Version for Release'
           git tag -a v${{ env.NEW_VERSION }} -m "v${{ env.NEW_VERSION }}" -f
           git push --tags -f
