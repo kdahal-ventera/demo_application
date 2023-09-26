@@ -5,7 +5,7 @@ on:
   
 jobs:
   Promote-TEST:
-    if: ${{ github.event.client_payload.ENVIRONMENT == 'test' }}
+
     runs-on: ubuntu-latest
     steps:
       ### Setup
