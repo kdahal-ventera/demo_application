@@ -20,7 +20,7 @@ jobs:
       - name: Update Version
         run: |
           git config --global user.name ${{ env.GH_USER_NAME }}
-          git config --global user.email ${{ kdahal@ventera.com }}
+          git config --global user.email kdahal@ventera.com
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.VSTART_GPM_AUTH }}" > .npmrc
           echo "@ventera-corporation:registry=https://npm.pkg.github.com/" >> .npmrc
           echo "LATEST_VERSION=$(npm view @ventera-corporation/dhs-odos-challenge-ui version)" >> $GITHUB_ENV
