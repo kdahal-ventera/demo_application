@@ -17,10 +17,9 @@ jobs:
         run: |
           git config --global user.name "kdahal-ventera"
           git config --global user.email "kdahal@ventera.com"
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.VSTART_GPM_AUTH }}" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
           echo "@ventera-corporation:registry=https://npm.pkg.github.com/" >> .npmrc
-          echo "LATEST_VERSION=$(npm view @ventera-corporation/dhs-odos-challenge-ui version)" >> $GITHUB_ENV
-          echo "NEW_VERSION=$(npm version ${{ env.VERSION_TYPE }} --no-git-tag-version | awk -F'v' '{print $2}')" >> $GITHUB_ENV
+          
       - name: Check Deployed Version for Additional Updates
         if: ${{ env.LATEST_VERSION == env.NEW_VERSION }}
         run: |
