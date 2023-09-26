@@ -22,7 +22,6 @@ jobs:
 
       - name: Commit and Tag
         run: |
-          rm .npmrc
           git add CHANGELOG.md package.json package-lock.json
           git commit -am 'Update Version for Release'
           git tag -a v${{ env.NEW_VERSION }} -m "v${{ env.NEW_VERSION }}" -f
