@@ -1,54 +1,11 @@
 name: Promote
 
 on:
-  repository_dispatch:
-    types: [Promote]
-  workflow_dispatch:
-    # Input has to be a string, not an array/list
-    # https://github.com/actions/toolkit/issues/184
-    inputs:
-      VERSION:
-        description: 'Image Version'
-        required: true
-        default: '0.1.0'
-      VERSION_TYPE:
-        description: 'New Version Identifer:
-          major | minor | patch | premajor | preminor | prepatch'
-        required: true
-        default: 'patch'
-
-env:
-  GH_PACKAGES: ghcr.io/ventera-corporation/dhs-odos-challenge-ui
-  GH_USER_NAME: ${{ secrets.VSTART_SERVICE_USER }}
-
+  push:
+  
 jobs:
   Promote-TEST:
     if: ${{ github.event.client_payload.ENVIRONMENT == 'test' }}
-    runs-on: ubuntu-latest
-    steps:
-      ### Setup
-      - name: Setup Repository Dispatch Action
-        if: ${{ github.event.inputs.VERSION_TYPE == '' }}
-        run: |
-          echo "VERSION_TYPE=patch" >> $GITHUB_ENV
-          echo "VERSION=${{ github.event.client_payload.VERSION }}" >> $GITHUB_ENV
-      - name: Setup Workflow Dispatch Action
-        if: ${{ !(github.event.inputs.VERSION_TYPE == '') }}
-        run: |
-          echo "VERSION_TYPE=${{ github.event.inputs.VERSION_TYPE }}" >> $GITHUB_ENV
-          echo "VERSION=${{ github.event.inputs.VERSION}}" >> $GITHUB_ENV
-      ### Deploy to TEST
-
-      ### Status Checks
-      - name: Security Dispatch Action
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          client-payload: '{"ENVIRONMENT": "stage","REF": "${{ github.ref }}"}'
-          event-type: Security
-          token: ${{ secrets.VSTART_GPM_AUTH }}
-
-  Promote-STAGE:
-    if: ${{ github.event.client_payload.ENVIRONMENT == 'stage' }}
     runs-on: ubuntu-latest
     steps:
       ### Setup
@@ -63,7 +20,7 @@ jobs:
       - name: Update Version
         run: |
           git config --global user.name ${{ env.GH_USER_NAME }}
-          git config --global user.email ${{ env.GH_USER_NAME }}@users.noreply.github.com
+          git config --global user.email ${{ kdahal@ventera.com }}
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.VSTART_GPM_AUTH }}" > .npmrc
           echo "@ventera-corporation:registry=https://npm.pkg.github.com/" >> .npmrc
           echo "LATEST_VERSION=$(npm view @ventera-corporation/dhs-odos-challenge-ui version)" >> $GITHUB_ENV
