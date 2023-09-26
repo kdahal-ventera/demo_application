@@ -12,11 +12,7 @@ jobs:
 
       ### Version and Tag
       - name: Default Checkout
-        uses: actions/checkout@v2
-      - name: Generate Change Log
-        run: |
-          git log --oneline ${{ github.event.client_payload.SHA_BEFORE }}..${{ github.event.client_payload.SHA_AFTER }} --pretty="- %s" > CHANGELOG.md
-          git log --oneline ${{ github.event.client_payload.SHA_BEFORE }}..${{ github.event.client_payload.SHA_AFTER }} --pretty="- %s" >> FULLCHANGELOG.md
+        uses: actions/checkout@v3
       - name: Update Version
         run: |
           git config --global user.name ${{ env.GH_USER_NAME }}
