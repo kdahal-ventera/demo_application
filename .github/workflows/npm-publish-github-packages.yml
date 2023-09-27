@@ -36,5 +36,6 @@ jobs:
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
       - run: npm publish
+          npm version patch -git-tag-version false
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
